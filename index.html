@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skincare Routine Cheat Sheet</title>
+    <title>Smart Skincare Routine</title>
     <style>
         :root {
             --primary-bg: #fdfdfd;
@@ -34,8 +34,15 @@
         h1 {
             text-align: center;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             color: #222;
+        }
+
+        #current-day-display {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
         .card {
@@ -44,6 +51,12 @@
             box-shadow: var(--shadow);
             margin-bottom: 20px;
             overflow: hidden;
+            display: block; /* Default display */
+        }
+
+        /* Helper class to hide cards via JS */
+        .hidden {
+            display: none !important;
         }
 
         .card-header {
@@ -143,7 +156,6 @@
             margin-bottom: 5px;
         }
 
-        /* Simple footer */
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -155,13 +167,14 @@
 <body>
 
 <div class="container">
-    <h1>Skincare Routine</h1>
+    <h1>Today's Routine</h1>
+    <div id="current-day-display">Loading date...</div>
 
     <div class="card">
         <div class="card-header header-morning">
             <div>
                 <div>MORNING</div>
-                <div class="days-label">Every Day</div>
+                [span_0](start_span)<div class="days-label">Every Day[span_0](end_span)</div>
             </div>
             <span>☀️</span>
         </div>
@@ -170,7 +183,7 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <span class="product-name">Cleanser</span>
-                    <span class="product-details">Massage gently 30-40s, rinse.</span>
+                    [span_1](start_span)<span class="product-details">Massage gently 30-40s, rinse[span_1](end_span).</span>
                     <br><span class="amount-badge">Coin sized</span>
                 </div>
             </li>
@@ -178,7 +191,7 @@
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <span class="product-name">Vitamin C 10%</span>
-                    <span class="product-details">Dot on face, press into skin.</span>
+                    [span_2](start_span)<span class="product-details">Dot on face, press into skin[span_2](end_span).</span>
                     <br><span class="amount-badge">2-3 drops</span>
                 </div>
             </li>
@@ -186,7 +199,7 @@
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <span class="product-name">Niacinamide</span>
-                    <span class="product-details">Pat gently, avoid rubbing.</span>
+                    [span_3](start_span)<span class="product-details">Pat gently, avoid rubbing[span_3](end_span).</span>
                     <br><span class="amount-badge">2-3 drops</span>
                 </div>
             </li>
@@ -194,7 +207,7 @@
                 <div class="step-number">4</div>
                 <div class="step-content">
                     <span class="product-name">Moisturiser</span>
-                    <span class="product-details">Massage lightly till absorbed.</span>
+                    [span_4](start_span)<span class="product-details">Massage lightly till absorbed[span_4](end_span).</span>
                     <br><span class="amount-badge">Pea sized</span>
                 </div>
             </li>
@@ -202,18 +215,18 @@
                 <div class="step-number">5</div>
                 <div class="step-content">
                     <span class="product-name">Sunscreen</span>
-                    <span class="product-details">Apply evenly on face & neck.</span>
+                    [span_5](start_span)<span class="product-details">Apply evenly on face & neck[span_5](end_span).</span>
                     <br><span class="amount-badge">2 finger lengths</span>
                 </div>
             </li>
         </ul>
     </div>
 
-    <div class="card">
+    <div class="card hidden" id="card-acid">
         <div class="card-header header-acid">
             <div>
                 <div>NIGHT: Salicylic Acid</div>
-                <div class="days-label">Mon, Thu, Sat</div>
+                [span_6](start_span)<div class="days-label">Mon, Thu, Sat[span_6](end_span)</div>
             </div>
             <span>🧪</span>
         </div>
@@ -222,7 +235,7 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <span class="product-name">Cleanser</span>
-                    <span class="product-details">Same method as morning.</span>
+                    [span_7](start_span)<span class="product-details">Same method as morning[span_7](end_span).</span>
                     <br><span class="amount-badge">Coin sized</span>
                 </div>
             </li>
@@ -230,7 +243,7 @@
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <span class="product-name">Salicylic Acid 2%</span>
-                    <span class="product-details">Apply dry skin, avoid eyes/lips.</span>
+                    [span_8](start_span)<span class="product-details">Apply dry skin, avoid eyes/lips[span_8](end_span).</span>
                     <br><span class="amount-badge">2 drops</span>
                 </div>
             </li>
@@ -238,14 +251,14 @@
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <span class="product-name">WAIT</span>
-                    <span class="product-details">Wait 2-3 minutes before next step.</span>
+                    [span_9](start_span)<span class="product-details">Wait 2-3 minutes before next step[span_9](end_span).</span>
                 </div>
             </li>
             <li class="step-item">
                 <div class="step-number">4</div>
                 <div class="step-content">
                     <span class="product-name">Niacinamide</span>
-                    <span class="product-details">Calms skin, reduces irritation.</span>
+                    [span_10](start_span)<span class="product-details">Calms skin, reduces irritation[span_10](end_span).</span>
                     <br><span class="amount-badge">2 drops</span>
                 </div>
             </li>
@@ -253,18 +266,18 @@
                 <div class="step-number">5</div>
                 <div class="step-content">
                     <span class="product-name">Moisturiser</span>
-                    <span class="product-details">Seal moisture, do not skip.</span>
+                    [span_11](start_span)<span class="product-details">Seal moisture, do not skip[span_11](end_span).</span>
                     <br><span class="amount-badge">Pea sized</span>
                 </div>
             </li>
         </ul>
     </div>
 
-    <div class="card">
+    <div class="card hidden" id="card-calm">
         <div class="card-header header-calm">
             <div>
                 <div>NIGHT: Non-Acid</div>
-                <div class="days-label">Tue, Wed, Fri, Sun</div>
+                [span_12](start_span)<div class="days-label">Tue, Wed, Fri, Sun[span_12](end_span)</div>
             </div>
             <span>💧</span>
         </div>
@@ -273,7 +286,7 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <span class="product-name">Cleanser</span>
-                    <span class="product-details">Clean face gently.</span>
+                    [span_13](start_span)<span class="product-details">Clean face gently[span_13](end_span).</span>
                     <br><span class="amount-badge">Coin sized</span>
                 </div>
             </li>
@@ -281,7 +294,7 @@
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <span class="product-name">Alpha Arbutin 2%</span>
-                    <span class="product-details">Apply evenly or on dark spots.</span>
+                    [span_14](start_span)<span class="product-details">Apply evenly or on dark spots[span_14](end_span).</span>
                     <br><span class="amount-badge">2-3 drops</span>
                 </div>
             </li>
@@ -289,7 +302,7 @@
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <span class="product-name">Niacinamide</span>
-                    <span class="product-details">Balances oil & supports barrier.</span>
+                    [span_15](start_span)<span class="product-details">Balances oil & supports barrier[span_15](end_span).</span>
                     <br><span class="amount-badge">2 drops</span>
                 </div>
             </li>
@@ -297,7 +310,7 @@
                 <div class="step-number">4</div>
                 <div class="step-content">
                     <span class="product-name">Moisturiser</span>
-                    <span class="product-details">Hydration and recovery.</span>
+                    [span_16](start_span)<span class="product-details">Hydration and recovery[span_16](end_span).</span>
                     <br><span class="amount-badge">Pea sized</span>
                 </div>
             </li>
@@ -305,7 +318,7 @@
     </div>
 
     <div class="notes">
-        <strong>⚠️ Important Notes:</strong>
+        [span_17](start_span)<strong>⚠️ Important Notes[span_17](end_span):</strong>
         <ul>
             <li>Sunscreen is mandatory every morning.</li>
             <li>Do not mix Vitamin C and Salicylic Acid in the same routine.</li>
@@ -315,9 +328,36 @@
     </div>
 
     <div class="footer">
-        Created for Capt. Shreyas 
+        Crafted for Capt. Shreyas
     </div>
 </div>
 
+<script>
+    // Logic to detect the day and show the correct card
+    document.addEventListener("DOMContentLoaded", function() {
+        const date = new Date();
+        const dayIndex = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        
+        // Update the header with today's name
+        document.getElementById("current-day-display").textContent = "Today is " + days[dayIndex];
+
+        [span_18](start_span)// Acid Nights: Mon (1), Thu (4), Sat (6)[span_18](end_span)
+        const acidDays = [1, 4, 6]; 
+        
+        const acidCard = document.getElementById("card-acid");
+        const calmCard = document.getElementById("card-calm");
+
+        if (acidDays.includes(dayIndex)) {
+            // Show Acid Routine
+            acidCard.classList.remove("hidden");
+        } else {
+            [span_19](start_span)// Show Calm Routine (Tue, Wed, Fri, Sun)[span_19](end_span)
+            calmCard.classList.remove("hidden");
+        }
+    });
+</script>
+
 </body>
 </html>
+
