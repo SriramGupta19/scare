@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Skincare Routine</title>
+    <title>Skincare Routine</title>
     <style>
         :root {
-            --primary-bg: #fdfdfd;
+            --primary-bg: #f4f4f4;
             --card-bg: #ffffff;
             --text-main: #333333;
             --text-light: #666666;
             --accent-morning: #FF9F1C; /* Sunny Orange */
             --accent-acid: #FF4081;    /* Pink/Red for Actives */
             --accent-calm: #2EC4B6;    /* Teal/Green for Recovery */
+            --accent-notes: #F4D35E;   /* Yellow for Notes */
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
             --radius: 12px;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: var(--primary-bg);
             color: var(--text-main);
             margin: 0;
             padding: 20px;
             line-height: 1.5;
-            padding-bottom: 80px; /* Space for footer/button */
+            padding-bottom: 50px;
         }
 
         .container {
@@ -42,20 +43,8 @@
         #current-day-display {
             text-align: center;
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 25px;
             font-weight: 500;
-        }
-
-        .toggle-btn {
-            display: block;
-            margin: 0 auto 20px auto;
-            background: none;
-            border: 1px solid #ccc;
-            padding: 5px 15px;
-            border-radius: 20px;
-            color: #666;
-            font-size: 0.8rem;
-            cursor: pointer;
         }
 
         .card {
@@ -85,6 +74,11 @@
         .header-morning { background-color: var(--accent-morning); }
         .header-acid { background-color: var(--accent-acid); }
         .header-calm { background-color: var(--accent-calm); }
+        /* Darker text for the yellow header so it is readable */
+        .header-notes { 
+            background-color: var(--accent-notes); 
+            color: #333; 
+        }
 
         .days-label {
             font-size: 0.8rem;
@@ -151,22 +145,20 @@
             margin-top: 5px;
         }
 
-        .notes {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 15px;
-            border-radius: var(--radius);
-            font-size: 0.9rem;
-        }
-
-        .notes ul {
+        /* Styles specifically for the Notes list to keep it clean */
+        .notes-list {
+            padding: 15px 20px 15px 40px; /* Left padding for bullets */
             margin: 0;
-            padding-left: 20px;
         }
         
-        .notes li {
-            margin-bottom: 5px;
+        .notes-list li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        
+        .notes-list li:last-child {
+            margin-bottom: 0;
         }
 
         .footer {
@@ -184,8 +176,6 @@
     
     <div id="current-day-display">Loading...</div>
     
-    <button class="toggle-btn" onclick="toggleNightRoutine()">Incorrect? Switch Night Routine</button>
-
     <div class="card">
         <div class="card-header header-morning">
             <div>
@@ -333,52 +323,36 @@
         </ul>
     </div>
 
-    <div class="notes">
-        <strong>⚠️ Important Notes:</strong>
-        <ul>
-            [span_0](start_span)<li>Sunscreen is mandatory every morning[span_0](end_span).</li>
-            [span_1](start_span)<li>Do not mix Vitamin C and Salicylic Acid[span_1](end_span).</li>
-            [span_2](start_span)<li>Always apply from thin to thick texture[span_2](end_span).</li>
-            [span_3](start_span)<li>If irritation occurs, stop acids for a few days[span_3](end_span).</li>
+    <div class="card">
+        <div class="card-header header-notes">
+            <div>
+                <div>Important Notes</div>
+            </div>
+            <span>⚠️</span>
+        </div>
+        <ul class="notes-list">
+            <li>Sunscreen is mandatory every morning.</li>
+            <li>Do not mix Vitamin C and Salicylic Acid in the same routine.</li>
+            <li>Always apply products from thin to thick texture.</li>
+            <li>If irritation occurs, stop acids for a few days.</li>
         </ul>
     </div>
 
     <div class="footer">
-        Based on Skincare Visual Cheat Sheet
+        Crafted with ♥️ for Capt. Shreyas
     </div>
 </div>
 
 <script>
-    function toggleNightRoutine() {
-        const acidCard = document.getElementById("card-acid");
-        const calmCard = document.getElementById("card-calm");
-        
-        // Simple toggle logic
-        if (acidCard.classList.contains("hidden")) {
-            acidCard.classList.remove("hidden");
-            calmCard.classList.add("hidden");
-        } else {
-            acidCard.classList.add("hidden");
-            calmCard.classList.remove("hidden");
-        }
-    }
-
     document.addEventListener("DOMContentLoaded", function() {
         const date = new Date();
-        const hour = date.getHours();
-
-        // LOGIC FIX: If it is before 4 AM, count it as the "previous day"
-        // This prevents the schedule from switching while you are still awake at 1 AM.
-        if (hour < 4) {
-            date.setDate(date.getDate() - 1);
-        }
-
-        const dayIndex = date.getDay(); // 0 = Sunday, 1 = Monday...
+        const dayIndex = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         
+        // Display current day
         document.getElementById("current-day-display").textContent = "Schedule for: " + days[dayIndex];
 
-        [span_4](start_span)// Acid Nights: Mon (1), Thu (4), Sat (6)[span_4](end_span)
+        // Acid Nights: Mon (1), Thu (4), Sat (6)
         const acidDays = [1, 4, 6]; 
         
         const acidCard = document.getElementById("card-acid");
@@ -388,7 +362,7 @@
             // Show Acid Routine
             acidCard.classList.remove("hidden");
         } else {
-            [span_5](start_span)// Show Calm Routine (Tue, Wed, Fri, Sun)[span_5](end_span)
+            // Show Calm Routine (Tue, Wed, Fri, Sun)
             calmCard.classList.remove("hidden");
         }
     });
@@ -396,3 +370,4 @@
 
 </body>
 </html>
+
