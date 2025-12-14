@@ -10,10 +10,10 @@
             --card-bg: #ffffff;
             --text-main: #333333;
             --text-light: #666666;
-            --accent-morning: #2EC4B6; /* Sunny Orange */
-            --accent-acid: #FF4081;    /* Pink/Red for Actives */
-            --accent-calm: #FF9F1C;    /* Teal/Green for Recovery */
-            --accent-notes: #F4D35E;   /* Yellow for Notes */
+            /* Your custom colors preserved */
+            --accent-morning: #2EC4B6; 
+            --accent-acid: #FF4081;    
+            --accent-calm: #FF9F1C;    
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
             --radius: 12px;
         }
@@ -74,11 +74,6 @@
         .header-morning { background-color: var(--accent-morning); }
         .header-acid { background-color: var(--accent-acid); }
         .header-calm { background-color: var(--accent-calm); }
-        /* Darker text for the yellow header so it is readable */
-        .header-notes { 
-            background-color: var(--accent-notes); 
-            color: #333; 
-        }
 
         .days-label {
             font-size: 0.8rem;
@@ -145,20 +140,24 @@
             margin-top: 5px;
         }
 
-        /* Styles specifically for the Notes list to keep it clean */
-        .notes-list {
-            padding: 15px 20px 15px 40px; /* Left padding for bullets */
+        /* Reverted Notes Style: Yellow Alert Box */
+        .notes {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .notes ul {
             margin: 0;
+            padding-left: 20px;
         }
         
-        .notes-list li {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            color: #444;
-        }
-        
-        .notes-list li:last-child {
-            margin-bottom: 0;
+        .notes li {
+            margin-bottom: 5px;
         }
 
         .footer {
@@ -323,14 +322,9 @@
         </ul>
     </div>
 
-    <div class="card">
-        <div class="card-header header-notes">
-            <div>
-                <div>Important Notes</div>
-            </div>
-            <span>⚠️</span>
-        </div>
-        <ul class="notes-list">
+    <div class="notes">
+        <strong>⚠️ Important Notes</strong>
+        <ul>
             <li>Sunscreen is mandatory every morning.</li>
             <li>Do not mix Vitamin C and Salicylic Acid in the same routine.</li>
             <li>Always apply products from thin to thick texture.</li>
